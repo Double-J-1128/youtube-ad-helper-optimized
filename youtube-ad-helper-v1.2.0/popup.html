@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube 广告位助手</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="container">
+    <header class="app-header">
+      <div class="brand-mark" aria-hidden="true"><span></span></div>
+      <div class="brand-copy">
+        <h1>YouTube 广告位助手</h1>
+        <p>批量设置中贴片广告时间点</p>
+      </div>
+      <span class="version">v1.2.0</span>
+    </header>
+
+    <section class="section strategy-section">
+      <div class="section-heading">
+        <h2>插入策略</h2>
+        <span>选择时间点生成方式</span>
+      </div>
+      <div class="mode-tabs" aria-label="插入模式">
+        <button type="button" id="autoModeBtn" class="active" aria-pressed="true">按时长分档</button>
+        <button type="button" id="manualModeBtn" aria-pressed="false">固定间隔</button>
+      </div>
+
+      <div id="autoPanel" class="field-list" aria-label="分档间隔设置">
+        <div class="row">
+          <label for="tier1">30 分钟以内</label>
+          <div class="input-shell">
+            <input type="number" id="tier1" min="1" max="86400" step="1" value="300">
+            <span class="unit">秒</span>
+          </div>
+        </div>
+        <div class="row">
+          <label for="tier2">30 分钟至 1 小时</label>
+          <div class="input-shell">
+            <input type="number" id="tier2" min="1" max="86400" step="1" value="480">
+            <span class="unit">秒</span>
+          </div>
+        </div>
+        <div class="row">
+          <label for="tier3">1 小时以上</label>
+          <div class="input-shell">
+            <input type="number" id="tier3" min="1" max="86400" step="1" value="600">
+            <span class="unit">秒</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="manualPanel" class="field-list hidden" aria-label="固定间隔设置">
+        <div class="row">
+          <label for="interval">每隔</label>
+          <div class="input-shell">
+            <input type="number" id="interval" min="1" max="86400" step="1" value="300">
+            <span class="unit">秒</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="时间范围设置">
+      <div class="section-heading">
+        <h2>时间范围</h2>
+        <span>避开片头与视频结尾</span>
+      </div>
+      <div class="field-list compact">
+        <div class="row">
+          <label for="startTime">首个时间点</label>
+          <div class="input-shell">
+            <input type="number" id="startTime" min="0" max="86400" step="1" value="120">
+            <span class="unit">秒</span>
+          </div>
+        </div>
+        <div class="row">
+          <label for="endBuffer">结尾预留</label>
+          <div class="input-shell">
+            <input type="number" id="endBuffer" min="0" max="86400" step="1" value="60">
+            <span class="unit">秒</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan-card" aria-label="计划预览">
+      <div class="plan-icon" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="plan-copy">
+        <strong>计划预览</strong>
+        <div id="preview" class="preview">正在读取视频信息…</div>
+        <div id="progress" class="progress" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <div class="button-group">
+      <button type="button" id="startBtn">开始执行</button>
+      <button type="button" id="stopBtn" disabled>停止任务</button>
+    </div>
+
+    <div id="status" class="status info" role="status" aria-live="polite" hidden></div>
+    <div class="footer"><span aria-hidden="true">●</span> 完成后请在 YouTube Studio 中检查并保存更改</div>
+  </main>
+
+  <script src="core.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

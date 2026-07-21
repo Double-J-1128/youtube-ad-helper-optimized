@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube广告位助手",
+  "version": "1.2.0",
+  "description": "在 YouTube Studio 中按计划批量添加中贴片广告位，并提供校验、进度和安全限制",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube广告位助手"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://studio.youtube.com/*"
+      ],
+      "js": [
+        "core.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
